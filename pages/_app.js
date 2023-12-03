@@ -2,8 +2,8 @@ import '@/styles/globals.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import axios from 'axios';
-import Footer from './(common)/footer';
 import Header from './(common)/Header';
+import Footer from './(common)/Footer';
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 const queryClient = new QueryClient();
 
