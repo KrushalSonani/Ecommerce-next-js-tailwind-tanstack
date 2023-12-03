@@ -8,9 +8,7 @@ import { useGetProducts } from '../api/api'
 
 function Products() {
     const { isPending, error, data, isFetching } = useGetProducts()
-
-    if (error) return 'An error has occurred: ' + error.message
-
+    if (error) return 'An error has occurred: ' + error?.message
 
     return (
         <div className='container  max-w-screen-2xl m-auto py-6'>
@@ -26,21 +24,20 @@ function Products() {
                 </div>
                 :
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8">
-
                     {data?.products?.map((item, i) => {
                         return (
                             <a key={i} href={`/products/${item.id}`} className='shadow-xl rounded-lg border-solid border border-inherit'>
                                 <li>
                                     <div className="rounded-t-lg relative border-solid border-b overflow-hidden p-4 bg-slate-50 aspect-[9/8] w-full">
-                                        <figure>
-                                            <Image
-                                                alt={item.title}
-                                                draggable={false}
-                                                className=" object-cover object-center transition ease-in-out hover:scale-110 duration-300"
-                                                src={item.thumbnail}
-                                                fill
-                                            />
-                                        </figure>
+                                        <Image
+                                            alt={item.title}
+                                            src={item.thumbnail}
+                                            draggable={false}
+                                            className=" object-cover object-center transition ease-in-out hover:scale-110 duration-300"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            fill
+                                            priority
+                                        />
                                     </div>
                                     <div className=" p-3">
                                         <p className="text-sm text-slate-500 mb-2">{item.category}</p>
@@ -59,7 +56,6 @@ function Products() {
                     }
                 </ul>
             }
-            {error && <div> Data Not Found </div>}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 {
-  "name": "new-app",
+  "name": "ecommerce-next-js-tailwind-tanstack",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,6 @@
     "@heroicons/react": "^2.0.18",
     "@tanstack/react-query": "^5.12.2",
     "@tanstack/react-query-devtools": "^5.12.2",
-    "axios": "^1.6.2",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18"

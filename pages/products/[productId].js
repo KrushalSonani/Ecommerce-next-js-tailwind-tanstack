@@ -4,13 +4,11 @@ import { updateProductById, useGetProductById } from '../api/api';
 import Image from 'next/image';
 import { useEffect, useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 const ProductDetailPage = () => {
     const router = useRouter();
     const { productId } = router.query;
     const { isPending, error, data, isFetching } = useGetProductById(productId);
-
     const [productData, setProductData] = useState({})
     const [currentImg, setCurrentImg] = useState(data?.thumbnail || '')
     const [open, setOpen] = useState(false)
@@ -18,7 +16,6 @@ const ProductDetailPage = () => {
         title: '',
         stock: '',
     });
-
     const cancelButtonRef = useRef(null)
 
     useEffect(() => {
@@ -26,8 +23,7 @@ const ProductDetailPage = () => {
         setProductData(data)
     }, [data])
 
-
-
+    //handle update functionality
     const handleupdate = async () => {
         let payload = productInfo
         let res = await updateProductById(productId, payload);
@@ -37,6 +33,7 @@ const ProductDetailPage = () => {
         }
     }
 
+    if (error) return 'An error has occurred: ' + error?.message
 
     return (
 
@@ -52,12 +49,13 @@ const ProductDetailPage = () => {
                     <div className="mx-auto flex flex-col md:flex-row">
                         <div>
                             <Image
-                                alt={productData?.title}
+                                alt={data?.title}
                                 draggable={false}
                                 className="object-contain object-top w-full"
-                                src={currentImg || productData?.thumbnail}
+                                src={currentImg || data?.thumbnail}
                                 width={560}
                                 height={560}
+                                priority
                             />
                             <div>
                                 <ul className='my-12 flex flex-wrap items-center justify-center gap-2 overflow-auto py-1 lg:mb-0'>
@@ -84,7 +82,7 @@ const ProductDetailPage = () => {
 
                         </div>
                         <div className='mt-10 flex flex-col sm:mt-0 sm:ml-10 relative'>
-                            <h1 className='mt-1 text-4xl font-bold uppercase text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl pr-10 '>{productData?.title}</h1>
+                            <h1 className='text-4xl font-bold uppercase text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl pr-10 '>{productData?.title}</h1>
                             <button className='flex gap-1 absolute right-0' onClick={() => setOpen(true)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -101,7 +99,6 @@ const ProductDetailPage = () => {
                         </div>
                     </div>
                 }
-                {error && <div> Data Not Found </div>}
             </div>
 
             <Transition.Root show={open} as={Fragment}>
@@ -179,10 +176,6 @@ const ProductDetailPage = () => {
                 </Dialog>
             </Transition.Root>
         </div >
-
-
-
-
     );
 };
 
