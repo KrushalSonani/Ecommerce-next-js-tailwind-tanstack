@@ -1,3 +1,7 @@
+/**
+ * This is common footer page 
+ */
+
 import React from 'react'
 
 function Footer() {

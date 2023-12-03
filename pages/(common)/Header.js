@@ -1,3 +1,7 @@
+/**
+ * This is common footer page 
+ */
+
 import React, { useState } from 'react'
 
 function Header() {

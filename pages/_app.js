@@ -1,3 +1,7 @@
+/**
+ * This is layout page 
+ */
+
 import '@/styles/globals.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
