@@ -28,7 +28,7 @@ function Products() {
                                         <div className="rounded-t-lg relative border-solid border-b overflow-hidden p-4 bg-slate-50 aspect-[9/5] w-full">
                                             <figure>
                                                 <Image
-                                                    alt="Thumbnail"
+                                                    alt={item.title}
                                                     draggable={false}
                                                     className=" object-cover object-center"
                                                     src={item.thumbnail}
