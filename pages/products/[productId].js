@@ -32,7 +32,6 @@ const ProductDetailPage = () => {
         let payload = productInfo
         let res = await updateProductById(productId, payload);
         if (res) {
-            debugger
             setProductData(res)
             setOpen(false)
         }
